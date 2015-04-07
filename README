@@ -3,9 +3,7 @@ http://keisugano.blogspot.jp/
 http://www.amazon.co.jp/s?rh=n%3A2128134051%2Ck%3A%E7%B4%A0%E4%BA%BA%E5%A4%A7%E5%AD%A6%E7%94%9F%2Cp_n_format_browse-bin%3A2381139051&keywords=%E7%B4%A0%E4%BA%BA%E5%A4%A7%E5%AD%A6%E7%94%9F&ie=UTF8&qid=1411434667
 
 
-Yab is the abbrebiation of Your AUTO Browser.
-
-Yab is command-line based browser, which stashes your bookmarks and
+Specto is command-line based browser, which stashes your bookmarks and
 incrementally opens these bookmarks, so that you can check these bookmarks
 equivallently each.
 
@@ -16,6 +14,6 @@ $./setup
 
 Usage
 
-$yab add [your favorite url here]
-$yab play
+$specto add [your favorite url here]
+$specto play
 
