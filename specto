@@ -1,0 +1,147 @@
+#!/usr/bin/env ruby
+
+option = ARGV[0]
+
+$rscroot = "/usr/local/specto/resource"
+
+require 'fileutils'
+require 'launchy'
+FileUtils.mkdir_p $rscroot
+
+GUI = "gui"
+CUI = "cui"
+
+def openurl(url, option)
+  case option
+  when GUI
+    Launchy.open url
+  when CUI
+    system "lynx #{url}"
+  else
+    abort "option invalid"
+  end
+end
+
+def enlist(file)
+  File.open(file, "r").each_line { |l|
+    puts l
+  }
+end
+
+def file_to_array(file)
+    makefile file
+    f = File.open(file, "r")
+    arr = f.each_line.to_a
+    f.close
+    arr
+end
+
+def makefile(file)
+  if (File.file?(file) == false)
+    f = File.new file, "w"
+    f.close
+  end
+end
+
+def getFile(category)
+  file = "#{$rscroot}/#{category}"
+  makefile file
+  file
+end
+
+def get_operation()
+  op = "#{$rscroot}/list"
+  if ARGV.size > 1
+    op = "#{$rscroot}/#{ARGV[1]}"
+  end
+  op
+end
+
+def get_option(arg)
+    if arg == GUI
+      return GUI
+    end
+    return CUI
+end
+
+def category(index)
+  if ARGV[index] != nil
+    return  ARGV[index]
+  end
+  abort "category required."
+end
+
+KEYS_COMMAND = "specto [category] ... enlist possible hyperlinks "
+CAT_COMMAND = "specto [lc] ... enlist categories "
+PUSH_COMAND = "specto add [category] [key] [url]   ... add [key][value] type bookmarks (not random)"
+CALL_COMMAND = "specto [category] [key] [output=\"cui/gui\"] .. obtain the url related to the key you registered"
+DEL_COMMAND = "specto [rmc] [category] ... delete category"
+
+def listkeys(ci)
+  file = "#{$rscroot}/#{category(ci)}"
+  puts ">> #{file}"
+  arr = file_to_array file
+  puts "---keys---"
+  arr.each { |line|
+    linesp = line.strip.chomp.split(' ')
+    puts " "+linesp[0]
+  }
+  puts "----------"
+end
+
+
+
+case option
+when "-h", "help", "h"
+  puts "========== SPECTO =========== "
+  puts
+  puts KEYS_COMMAND
+  puts CAT_COMMAND
+  puts PUSH_COMAND
+  puts CALL_COMMAND
+  puts DEL_COMMAND
+  puts
+when "add"
+  def validate(argsize, message)
+    if ARGV.size < argsize
+      abort "==> "+message
+    end
+  end
+
+  validate(3, PUSH_COMAND)
+  f = File.open(getFile(category(1)), "a")
+  f.puts "#{ARGV[2]} #{ARGV[3]}"
+  f.close
+when "lc" # list categories
+  system "ls #{$rscroot}"
+when "rmc"
+  system "rm #{$rscroot}/#{category(1)}"
+else
+  # ./specto category = list keys sub category
+  # ./specto category key = call
+
+  if ARGV.size < 1
+   abort "argument is not sufficiently provided. " + CALL_COMMAND
+  end
+  if ARGV.size == 1
+   listkeys(0)
+   abort
+  end
+
+  key = ARGV[1]
+
+  file = "#{$rscroot}/#{category(0)}"
+
+  puts file
+
+  lines = file_to_array file
+  lines.each{ |line|
+    linesp = line.strip.chomp.split(' ')
+    if linesp[0] == key
+      openurl linesp[1], get_option(ARGV[2])
+    end
+  }
+end
+
+
+

@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+src = "specto"
+dest = "/usr/local/bin/specto"
+FileUtils.copy_file(src, dest)
