@@ -15,20 +15,6 @@ FileUtils.mkdir_p $rscroot
 GUI = "g"
 CUI = "cui"
 
-=begin
-def openurl(url, option)
-  case option
-  when GUI
-    Launchy.open url
-  when CUI
-    system "lynx #{url}"
-  else
-    abort "option invalid"
-  end
-end
-
-=end
-
 
 KEYS_COMMAND = "specto [category] ... enlist possible hyperlinks "
 CAT_COMMAND = "specto [lc] ... enlist categories "
