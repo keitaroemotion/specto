@@ -4,4 +4,9 @@ require 'fileutils'
 
 src = "specto"
 dest = "/usr/local/bin/specto"
+
 FileUtils.copy_file(src, dest)
+libdest = "/usr/local/lib/specto"
+FileUtils.mkdir_p libdest
+system("cp -r lib/* #{libdest}")
+

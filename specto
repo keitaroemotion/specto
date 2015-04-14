@@ -6,11 +6,16 @@ $rscroot = "/usr/local/specto/resource"
 
 require 'fileutils'
 require 'launchy'
+require '/usr/local/lib/specto/spectojuvale.rb'
+#$LOAD_PATH.unshift(File.dirname("/usr/local/lib/specto/*"))
+
 FileUtils.mkdir_p $rscroot
 
-GUI = "gui"
+#GUI = "gui"
+GUI = "g"
 CUI = "cui"
 
+=begin
 def openurl(url, option)
   case option
   when GUI
@@ -22,54 +27,8 @@ def openurl(url, option)
   end
 end
 
-def enlist(file)
-  File.open(file, "r").each_line { |l|
-    puts l
-  }
-end
+=end
 
-def file_to_array(file)
-    makefile file
-    f = File.open(file, "r")
-    arr = f.each_line.to_a
-    f.close
-    arr
-end
-
-def makefile(file)
-  if (File.file?(file) == false)
-    f = File.new file, "w"
-    f.close
-  end
-end
-
-def getFile(category)
-  file = "#{$rscroot}/#{category}"
-  makefile file
-  file
-end
-
-def get_operation()
-  op = "#{$rscroot}/list"
-  if ARGV.size > 1
-    op = "#{$rscroot}/#{ARGV[1]}"
-  end
-  op
-end
-
-def get_option(arg)
-    if arg == GUI
-      return GUI
-    end
-    return CUI
-end
-
-def category(index)
-  if ARGV[index] != nil
-    return  ARGV[index]
-  end
-  abort "category required."
-end
 
 KEYS_COMMAND = "specto [category] ... enlist possible hyperlinks "
 CAT_COMMAND = "specto [lc] ... enlist categories "
@@ -78,21 +37,19 @@ CALL_COMMAND = "specto [category] [key] [output=\"cui/gui\"] .. obtain the url r
 DEL_COMMAND = "specto [rmc] [category] ... delete category"
 
 def listkeys(ci)
-  file = "#{$rscroot}/#{category(ci)}"
+  file = "#{$rscroot}/#{SpectoJuvare.category(ci)}"
   puts ">> #{file}"
-  arr = file_to_array file
+  arr = SpectoJuvare.file_to_array file
   puts "---keys---"
   arr.each { |line|
+
     linesp = line.strip.chomp.split(' ')
     puts " "+linesp[0]
   }
   puts "----------"
 end
 
-
-
-case option
-when "-h", "help", "h"
+def showHelp()
   puts "========== SPECTO =========== "
   puts
   puts KEYS_COMMAND
@@ -101,7 +58,9 @@ when "-h", "help", "h"
   puts CALL_COMMAND
   puts DEL_COMMAND
   puts
-when "add"
+end
+
+def doaddop(categoryindex, pi1, pi2)
   def validate(argsize, message)
     if ARGV.size < argsize
       abort "==> "+message
@@ -109,19 +68,59 @@ when "add"
   end
 
   validate(3, PUSH_COMAND)
-  f = File.open(getFile(category(1)), "a")
-  f.puts "#{ARGV[2]} #{ARGV[3]}"
+
+  key = ARGV[pi1]
+  value = ARGV[pi2]
+  sententia = "#{key} #{value}"
+
+  tmp = Hash.new
+  target = SpectoJuvare.getFile(SpectoJuvare.category(categoryindex))
+
+  def concat(tmp, key, value):String
+    if tmp.has_key? key
+      tmp[key] + "," + value
+    else
+      value
+    end
+  end
+
+  File.open(target, "r").each do |line|
+    lsp = line.split(" ")
+    #if tmp.has_key? lsp[0]
+      #tmp[lsp[0]] = tmp[lsp[0]] + "," + lsp[1]
+    #  concat tmp, lsp[0], lsp[1]
+    #else
+    #  tmp[lsp[0]] = lsp[1]
+    #end
+    tmp[lsp[0]] =  concat tmp, lsp[0], lsp[1]
+  end
+
+  tmp[key] = concat tmp, key, value
+
+  f = File.open(SpectoJuvare.getFile(SpectoJuvare.category(categoryindex)), "w")
+  tmp.keys.each do |eachkey|
+    f.puts "#{eachkey} #{tmp[eachkey]}"
+  end
   f.close
+
+end
+
+case option
+  when "-h", "help", "h", ""
+    showHelp
+when "add"
+    doaddop 1, 2, 3
 when "lc" # list categories
   system "ls #{$rscroot}"
 when "rmc"
-  system "rm #{$rscroot}/#{category(1)}"
+  system "rm #{$rscroot}/#{SpectoJuvare.category(1)}"
 else
   # ./specto category = list keys sub category
   # ./specto category key = call
 
   if ARGV.size < 1
-   abort "argument is not sufficiently provided. " + CALL_COMMAND
+   showHelp()
+   #abort "argument is not sufficiently provided. " + CALL_COMMAND
   end
   if ARGV.size == 1
    listkeys(0)
@@ -129,16 +128,22 @@ else
   end
 
   key = ARGV[1]
+  if key == "add"
+    doaddop 0, 2, 3
+    abort ""
+  end
 
-  file = "#{$rscroot}/#{category(0)}"
+  category = SpectoJuvare.category(0)
+
+  file = "#{$rscroot}/#{category}"
 
   puts file
 
-  lines = file_to_array file
+  lines = SpectoJuvare.file_to_array file
   lines.each{ |line|
     linesp = line.strip.chomp.split(' ')
     if linesp[0] == key
-      openurl linesp[1], get_option(ARGV[2])
+      SpectoJuvare.openurl linesp[1], SpectoJuvare.get_option(ARGV[2])
     end
   }
 end
