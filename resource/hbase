@@ -1,0 +1,104 @@
+  1.10
+Unreleased  1.0.2     Bug fix release for HBase-1.0 branch
+Unreleased  0.98.14     Bug fix release
+Unreleased  hbase-12439     Developer branch for procedure v2
+Unreleased  0.98.13     Bug fix release
+Unreleased  2.2.0
+Unreleased  1.1.1
+Released  0.98.10.1   13/Feb/15 Patch release
+Released  0.98.12   17/Apr/15 Bug fix release
+Unreleased  0.94.28     Bug fix release
+Released  0.98.11   09/Mar/15 Bug fix release
+Unreleased  HBASE-12259
+Released  0.94.27   25/Mar/15 Bug fix release
+Unreleased  1.1.0     Next minor version for HBase-1.x
+Unreleased  1.0.1     Bug fix release for HBase-1.0 branch
+Released  0.98.10   05/Feb/15 Bug fix release
+Released  0.99.2    07/Dec/14 Next in the developer preview release of upcoming 1.0 branch. No guarantees are made for backwards/forwards compatibility.
+Released  0.98.9    22/Dec/14 Bug fix release
+Released  0.94.26   26/Dec/14 Bug fix release
+Released  0.98.6.1    16/Sep/14 Patch release
+Released  0.94.25   25/Nov/14 Bug fix release
+Released  0.99.1    15/Oct/14 Next in the developer preview release of upcoming 1.0 branch. No guarantees are made for backwards/forwards compatibility.
+Unreleased  hbase-11339     Developer branch for HBAse Medium Object (MOB) Storage
+Released  0.98.8    15/Nov/14 Bug fix release
+Released  0.94.24   04/Oct/14 Bug fix release
+Released  0.98.7    16/Oct/14 Bug fix release
+Released  0.98.6    11/Sep/14 Bug fix release
+Released  0.94.23   05/Sep/14 Bug fix release
+Unreleased  2.0.0     Major release for HBase-2.0.0
+Released  0.94.22   07/Aug/14 Bug fix release
+Released  0.98.5    11/Aug/14 Bug fix release
+Released  0.98.4    21/Jul/14 Bug fix release
+Released  0.94.21   03/Jul/14 Bug fix release
+Released  0.98.3    07/Jun/14 Bug fix release
+Released  0.94.20   29/May/14 Bug fix release
+Released  0.98.2    07/May/14 Bug fix release
+Released  0.94.19   28/Apr/14 Bug fix release
+Unreleased  hbase-10191     Development branch for HBASE-10191
+Unreleased  hbase-10070     Developer branch for HBASE-10070
+Released  0.94.18   24/Mar/14 Bug fix release
+Released  1.0.0   21/Feb/15 Major release for HBase-1.0.0
+Released  0.94.17   25/Feb/14 Bug fix release
+Released  0.96.1.1  17/Dec/13 19/Dec/13 Hotfix for api compat problem.
+Released  0.99.0    22/Sep/14 A developer preview release of upcoming 1.0 branch. No guarantees are made for backwards/forwards compatibility.
+Released  0.98.1    06/Apr/14 Bug fix release
+Released  0.96.2    03/Apr/14 Bug fix release
+Released  0.94.16   20/Jan/14 Bug fix release
+Released  0.94.15   29/Dec/13 Bug fix release
+Released  0.94.14   25/Nov/13 Bug fix release
+Released  0.96.1    16/Dec/13 Bug fix release
+Released  0.94.13   07/Nov/13 Bug fix release
+Released  0.96.0    19/Oct/13 The "Singularity", because you will have to start and stop your cluster bringing it up on 0.96.0. 0.96.0 requires Hadoop 1.0.0 at least. It will be supported on Hadoop 2.0.0 too. 0.96.0 is all protobufs all the time; all of its serializations to zookeeper, to the filesystem, and over rpc are protobufs. It runs on jdk7. Metrics have been edited and converted to use Hadoop Metrics2. Has HBase Snapshots and PrefixTreeCompression, etc
+Released  0.94.12   24/Sep/13 Bug fix release
+Released  0.94.11   20/Aug/13 Bug fix release
+Released  0.94.10   24/Jul/13 Bug fix release
+Released  0.94.9    04/Jul/13 Bug fix release
+Released  0.95.2    15/Aug/13 Next in the 0.95 "Development" Series of releases. Serves as "rough cut" preview of what is coming in 0.96 which is known as the "Singularity", because you will have to start and stop your cluster bringing it up on 0.96.0. 0.96.0 will require Hadoop 1.0.0 at least. It will be supported on Hadoop 2.0.0 too. 0.96.0 will be all protobufs all the time; all of its serializations to zookeeper, to the filesystem, and over rpc will be protobufs. It runs on jdk7. Metrics will be edited and converted to use Hadoop Metrics2. A preview of HBase Snapshots and PrefixTreeCompression,
+Released  0.95.1    11/Jun/13 Next in the 0.95 "Development" Series of releases. Serves as a "rough cut" preview of what is coming in 0.96.0. Not for production.
+Released  0.95.0    07/Apr/13 First in the 0.95 "Development" Series of releases. Serves as a "rough cut" preview of what is coming in 0.96.0. Not for production.
+Released  0.94.8    31/May/13 Bug fix release
+Released  0.94.7    25/Apr/13 Bug fix release
+Released  0.94.6.1    04/Apr/13 Emergency Bug Fix
+Released  0.94.6    22/Mar/13 Bug fix release
+Released  0.94.5    15/Feb/13 Bug fix release
+Released  0.94.4    12/Jan/13 Bug fix release
+Released  0.98.0    16/Feb/14 Major release
+Unreleased  hbase-7290      HBase Online Table Snapshot dev branch
+Unreleased  hbase-6055      HBase Table Snapshots branch
+Released  0.94.3    03/Dec/12 Bug fix release
+Released  0.94.2    11/Oct/12 Bug fix release
+Released  0.94.1    07/Aug/12 Bug fix release
+Released  0.94.0    14/May/12 Performance Release
+Released  0.92.2    13/Sep/12 Bug fix version
+Released  0.92.1    17/Mar/12 Minor release for 0.92
+Released  0.92.0    23/Jan/12 Adds security, coprocessors, new store file format, and distributed log splitting.
+Released  0.90.6    16/Mar/12 Bug fix version
+Released  0.90.5    22/Dec/11 Bug fix version
+Released  0.90.4    10/Aug/11 Bug fix release
+Released  0.90.3    19/May/11 Bug fix release
+Released  0.90.2    08/Apr/11
+Released  0.90.1    17/Feb/11 Bug fix release
+Released  0.90.0    19/Jan/11
+Unreleased  0.89-fb     FB branch
+Released  0.89.20100924   06/Oct/10 Last dev release before the new master
+Released  0.89.20100621   25/Jun/10 0.90.0 preview 'developer release'
+Released  0.20.6    30/Jul/10 Bug fixes
+Released  0.20.5    24/Jun/10 Patch release
+Released  0.20.4    05/May/10 Bug fix release
+Released  0.20.3    25/Jan/10 Bug fix release
+Released  0.20.2    19/Nov/09 Bug fixes over 0.20.1
+Released  0.20.1    12/Oct/09
+Released  0.19.3    27/May/09 Bug fix release
+Released  0.20.0    08/Sep/09 based on hadoop-0.20
+Released  0.19.2    09/May/09 Bug fixes
+Released  0.19.1    19/Mar/09
+Released  0.19.0    21/Jan/09 based on hadoop-0.19
+Released  0.18.1    27/Oct/08 patch release for post 0.18.0 bugs
+Released  0.18.0    21/Sep/08 0.18.0 hbase will be pegged to 0.18 hadoop
+Released  0.2.1   13/Sep/08
+Released  0.2.0   08/Aug/08 First functionally different release after becomming a Hadoop sub project
+Released  0.1.3   27/Jun/08 Bug-fix release on 0.1 branchReleased 0.1.2   13/May/08
+Released  0.1.1   11/Apr/08
+Released  0.1.0   27/Mar/08 Initial release after moving from Hadoop contrib to Hadoop subproject
+Released  0.16.0    02/Feb/08 Hbase that is bundled into the hadoop 0.16.0 release

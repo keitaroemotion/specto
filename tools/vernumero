@@ -1,0 +1,62 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+if ARGV.size == 0
+  abort "vernumero [file] [op]"
+end
+
+
+
+target = ARGV[0]
+op  = ARGV[1]
+
+
+def isversion(sect)
+  count = 0
+  sect.split('').each do |c|
+    if c == "."
+       count = count+1
+    end
+  end
+  if count == 2
+    return true
+  end
+  return false
+end
+
+arr = Array.new
+
+
+File.open(target, "r").each do |line|
+  line.split(' ').each do |sect|
+    if isversion sect
+      sp = sect.split(".")
+      arr.push [sp[0].gsub("v","").gsub("r",""), sp[1], sp[2]]
+    end
+  end
+end
+
+hash = Hash.new
+maj = ""
+value = Array.new
+
+arr.each do |info|
+  key = info[0]
+  min = info[1]
+  if  hash.include? key
+    if !hash[key].include? min
+      hash[key] = hash[key] +"."+ min
+    end
+  else
+    hash[key] =  min
+  end
+end
+
+#hash[maj] = value
+hash.keys.each do |k|
+  puts "major_name:#{k}  minors:#{hash[k].split('.').size}"
+end
+
+
+

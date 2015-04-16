@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require 'open-uri'
+require 'nokogiri'
+
+if ARGV.size < 2
+  abort "w2 [destination file] [url]"
+end
+
+url = ARGV[0]
+target = ARGV[1] # or locale
+
+def write(url, target)
+  #source = Nokogiri::HTML(open(url){|f| f.read })
+  source = Nokogiri::HTML(open(url))
+  puts source.xpath("//span")
+  #f = File.open(target,"a")
+  #f.close
+end
+
+if url.end_with? ".locale"
+  File.open(url, "r").each do |file|
+    if file.strip != ""
+      write file, target
+    end
+  end
+end
+

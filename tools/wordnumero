@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+if ARGV.size == 0
+  abort "counter [file] [searchword]"
+end
+
+target = ARGV[0]
+word = ARGV[1]
+
+count = 0
+lc = 0
+
+File.open(target, "r").each do |line|
+   lc = lc+1
+   if line.include? word
+     count = count+1
+   end
+end
+
+puts "#{lc} lines"
+puts "#{count} of the word #{word} found"
+
+

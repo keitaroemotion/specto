@@ -11,10 +11,8 @@ require '/usr/local/lib/specto/spectojuvale.rb'
 
 FileUtils.mkdir_p $rscroot
 
-#GUI = "gui"
 GUI = "g"
 CUI = "cui"
-
 
 KEYS_COMMAND = "specto [category] ... enlist possible hyperlinks "
 CAT_COMMAND = "specto [lc] ... enlist categories "
@@ -72,12 +70,6 @@ def doaddop(categoryindex, pi1, pi2)
 
   File.open(target, "r").each do |line|
     lsp = line.split(" ")
-    #if tmp.has_key? lsp[0]
-      #tmp[lsp[0]] = tmp[lsp[0]] + "," + lsp[1]
-    #  concat tmp, lsp[0], lsp[1]
-    #else
-    #  tmp[lsp[0]] = lsp[1]
-    #end
     tmp[lsp[0]] =  concat tmp, lsp[0], lsp[1]
   end
 
@@ -100,13 +92,44 @@ when "lc" # list categories
   system "ls #{$rscroot}"
 when "rmc"
   system "rm #{$rscroot}/#{SpectoJuvare.category(1)}"
+when "todo"
+  targetinf = "/usr/local/specto/config"
+  dirs = Array.new
+  # see setting file to see the location (directory)
+  # todo_dir: ....
+  $todo_dir = "todo_dir:"
+  File.open(targetinf, "r").each do |line|
+    if line.start_with? $todo_dir
+      dirs.push line
+    end
+  end
+  # iterate files in the target directory
+  def collect_todos(dir):Array
+    todos = Array.new
+    dir = dir.gsub($todo_dir,"").strip
+    Dir.foreach(dir) do |file|
+      if ((File.directory?(file) == false) && !file.end_with?(".swp") )
+        File.open("#{dir}/#{file}", "r").each do |line|
+          if line.include? "todo"
+            todos.push "* "+line.gsub("todo","").strip
+          end
+        end
+      end
+    end
+    return todos
+  end
+
+  puts "--------- todos ---------"
+  dirs.each do |dir|
+    puts collect_todos(dir)
+  end
+  puts "-------------------------"
+  # correct sentence starts from "todo"
+  # show each
 else
-  # ./specto category = list keys sub category
-  # ./specto category key = call
 
   if ARGV.size < 1
    showHelp()
-   #abort "argument is not sufficiently provided. " + CALL_COMMAND
   end
   if ARGV.size == 1
    listkeys(0)
