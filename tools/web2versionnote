@@ -7,15 +7,22 @@ if ARGV.size < 2
   abort "w2 [destination file] [url]"
 end
 
-url = ARGV[0]
-target = ARGV[1] # or locale
+url = ARGV[0] # or locale
+target = ARGV[1]
 
 def write(url, target)
-  #source = Nokogiri::HTML(open(url){|f| f.read })
+  f = File.open(target,"a")
   source = Nokogiri::HTML(open(url))
-  puts source.xpath("//span")
-  #f = File.open(target,"a")
-  #f.close
+  date = ""
+  source.xpath("//span").each do |line|
+    if line.first[1] == "date"
+      date = line.content.strip.chomp
+    end
+    if line.first[1] == "tag-name"
+      f.puts "#{line.content} (#{date})"
+    end
+  end
+  f.close
 end
 
 if url.end_with? ".locale"

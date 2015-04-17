@@ -2,7 +2,7 @@
 
 option = ARGV[0]
 
-$rscroot = "/usr/local/specto/resource"
+$rscroot = "/usr/local/etc/specto/resource"
 
 require 'fileutils'
 require 'launchy'
@@ -92,8 +92,24 @@ when "lc" # list categories
   system "ls #{$rscroot}"
 when "rmc"
   system "rm #{$rscroot}/#{SpectoJuvare.category(1)}"
+when "find"
+  #ARGV[0] est command
+  if ARGV.size < 2
+    abort "arguments required."
+  end
+  term = "https://www.google.co.jp/search?q="
+
+  (1 .. ARGV.size-1).each do |i|
+    if i == ARGV.size-1
+      term += ARGV[i]
+    else
+      term += ARGV[i]+"+"
+    end
+  end
+
+  Launchy.open(term)
 when "todo"
-  targetinf = "/usr/local/specto/config"
+  targetinf = "/usr/local/etc/specto/config"
   dirs = Array.new
   # see setting file to see the location (directory)
   # todo_dir: ....

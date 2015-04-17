@@ -19,7 +19,7 @@ def isversion(sect)
        count = count+1
     end
   end
-  if count == 2
+  if count > 1
     return true
   end
   return false

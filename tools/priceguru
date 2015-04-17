@@ -1,0 +1,55 @@
+#!/usr/bin/env ruby
+
+# -- as comment
+# get infile
+# parse infile
+# calc infile (option needed)
+
+op = ARGV[0]
+file = ARGV[1]
+
+
+def worthless(line):Boolean
+  if ((line.strip == "") || (line.start_with?("--")))
+    return true
+  end
+  return false
+end
+
+def isSub(line)
+   if ((line.start_with? "  ") && (line.split("")[2] != ""))
+     return true
+   end
+   return false
+end
+
+def parse(file):Hash
+  pan_data = Hash.new
+  data     = Hash.new
+  prev_key = ""
+
+  File.open(file, "r").each do |line|
+    if(!worthless(line))
+      if(isSub(line))
+        lp = line.split(':')
+        data[lp[0].strip] = lp[1]
+      else #label
+        pan_data[prev_key] = data
+        prev_key = line.strip
+        data = Hash.new
+      end
+    end
+  end
+  return pan_data
+end
+
+case op
+when "show"
+  bundle = parse(file)
+  bundle.keys.each do |key|
+    puts bundle[key]["init"]
+  end
+else
+  abort "the command you requested does not exist."
+end
+
