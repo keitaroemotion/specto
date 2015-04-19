@@ -14,11 +14,11 @@ FileUtils.mkdir_p $rscroot
 GUI = "g"
 CUI = "cui"
 
-KEYS_COMMAND = "specto [category] ... enlist possible hyperlinks "
-CAT_COMMAND = "specto [lc] ... enlist categories "
-PUSH_COMAND = "specto add [category] [key] [url]   ... add [key][value] type bookmarks (not random)"
-CALL_COMMAND = "specto [category] [key] [output=\"cui/gui\"] .. obtain the url related to the key you registered"
-DEL_COMMAND = "specto [rmc] [category] ... delete category"
+KEYS_COMMAND = "see [category] ... enlist possible hyperlinks "
+CAT_COMMAND = "see [lc] ... enlist categories "
+PUSH_COMAND = "see add [category] [key] [url]   ... add [key][value] type bookmarks (not random)"
+CALL_COMMAND = "see [category] [key] [output=\"cui/gui\"] .. obtain the url related to the key you registered"
+DEL_COMMAND = "see [rmc] [category] ... delete category"
 
 def listkeys(ci)
   file = "#{$rscroot}/#{SpectoJuvare.category(ci)}"

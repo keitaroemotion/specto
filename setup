@@ -2,8 +2,8 @@
 
 require 'fileutils'
 
-src = "specto"
-dest = "/usr/local/bin/specto"
+src = "see"
+dest = "/usr/local/bin/see"
 
 FileUtils.copy_file(src, dest)
 libdest = "/usr/local/lib/specto"
