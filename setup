@@ -12,3 +12,6 @@ FileUtils.mkdir_p libdest
 system("cp -r lib/* #{libdest}")
 system("cp config #{configdest}")
 
+src = "del"
+dest = "/usr/local/bin/del"
+system("cp #{src} #{dest}")

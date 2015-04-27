@@ -87,7 +87,7 @@ case option
   when "-h", "help", "h", ""
     showHelp
 when "add"
-    doaddop 1, 2, 3
+  doaddop 1, 2, 3
 when "lc" # list categories
   system "ls #{$rscroot}"
 when "rmc"
@@ -120,30 +120,99 @@ when "todo"
     end
   end
   # iterate files in the target directory
-  def collect_todos(dir):Array
-    todos = Array.new
-    dir = dir.gsub($todo_dir,"").strip
-    Dir.foreach(dir) do |file|
-      if ((File.directory?(file) == false) && !file.end_with?(".swp") )
-        File.open("#{dir}/#{file}", "r").each do |line|
-          if line.include? "todo"
-            todos.push "* "+line.gsub("todo","").strip
-          end
-        end
+
+  def getFileContent(dir, file):Array
+    arr = Array.new
+    File.open("#{dir}/#{file}", "r").each do |line|
+      arr.push line
+    end
+    arr
+  end
+
+  def isFileEligible(file):Boolean
+    if ((File.directory?(file) == false) && !file.end_with?(".swp") )
+      return true
+    end
+    return false
+  end
+
+  def get_todos(todos, contents):Array
+    contents.each do |line|
+      if line.include? "todo"
+        todos.push "* "+line.gsub("todo","").strip
       end
     end
     return todos
   end
 
+  def strip(line)
+    begin
+      return line.strip
+    rescue
+      return ""
+    end
+  end
+
+  def rm_todos(query, contents, file, dir)
+    if query == nil || query == ""
+    else
+
+      f = File.open(dir+"/"+file, "w")
+      contents.each do |line|
+        if ((strip(line).start_with?(query)))
+          puts "deleted: #{line}"
+        else
+          f.puts line
+        end
+      end
+      f.close
+    end
+  end
+
+  def delete(dir, query):Array
+    Dir.foreach(dir) do |file|
+      if isFileEligible file
+        rm_todos query, getFileContent(dir, file), file, dir
+      end
+    end
+    return enlist(dir)
+  end
+
+  def enlist(dir):Array
+    todos = Array.new
+    Dir.foreach(dir) do |file|
+      if isFileEligible file
+        todos = get_todos(todos, getFileContent(dir, file))
+      end
+    end
+    return todos
+  end
+
+  def collect_todos(dir, query):Array
+
+    dir = dir.gsub($todo_dir,"").strip
+
+    case query
+    when ""
+      return enlist(dir)
+    else
+      return delete(dir, query)
+    end
+  end
+
+  query = ""
+  if ARGV[1] != ""
+    query = ARGV[1]
+  end
+
   puts "--------- todos ---------"
   dirs.each do |dir|
-    puts collect_todos(dir)
+    puts collect_todos(dir, query)
   end
   puts "-------------------------"
   # correct sentence starts from "todo"
   # show each
 else
-
   if ARGV.size < 1
    showHelp()
   end
