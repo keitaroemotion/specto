@@ -2,12 +2,12 @@
 
 # ./ target
 
-if ARGV.size != 1
+if ARGV.size < 1
   abort "del size wrong"
 end
 
-target = ARGV[0]
-
-system("mv  #{target} ~/.Trash" )
+for target in ARGV
+  system("mv  #{target} ~/.Trash" )
+end
 
 
